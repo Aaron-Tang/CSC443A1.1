@@ -44,5 +44,5 @@ static int convert_to_records(char * filename){
 }
 
 int main(int argc, char **argv){
-	convert_to_records("edges.csv");	
+	convert_to_records(argv[2]);	
 }
