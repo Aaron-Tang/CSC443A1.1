@@ -3,6 +3,6 @@ typedef struct record {
  int uid2;
 } Record;
 
-const MAX_CHARS_PER_LINE = 1024;
+const int MAX_CHARS_PER_LINE = 1024;
 
-void convert_to_record(const char * filename)
+void convert_to_record(const char * filename);
