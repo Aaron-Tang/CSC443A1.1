@@ -21,7 +21,7 @@ void convert_to_record(char line[], Record * current_record){
 
 }
 
-static int convert_to_records(char * filename, struct record buffer[]){
+static int convert_to_records(char * filename, struct record * buffer[]){
 	/* returns: -1 if there is an error. */
 	
 	char current_line[MAX_CHARS_PER_LINE];
