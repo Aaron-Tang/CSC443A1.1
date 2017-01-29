@@ -36,10 +36,10 @@ static int convert_to_records(char * filename, struct record buffer[]){
 	/* reading lines */
 	while( fgets (current_line, MAX_CHARS_PER_LINE, fp_read)!=NULL ) {
 		current_line [strcspn (current_line, "\r\n")] = '\0'; //remove end-of-line characters
-		struct record current = (struct record) malloc(sizeof(record));
+		struct record current = (struct record) malloc(sizeof(struct record));
 		current = convert_to_record(current_line);
 		buffer[counter] = current;
-		free(current);
+		free(&current);
 	}
 	
 	fclose (fp_read);
