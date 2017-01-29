@@ -35,7 +35,8 @@ static int convert_to_records(char * filename){
 	/* reading lines */
 	while( fgets (current_line, MAX_CHARS_PER_LINE, fp_read)!=NULL ) {
 		current_line [strcspn (current_line, "\r\n")] = '\0'; //remove end-of-line characters
-		convert_to_record(current_line);
+		struct record current = convert_to_record(current_line);
+		printf("%d\n", current.uid1);
 	}
 	
 	fclose (fp_read);
