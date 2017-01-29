@@ -51,6 +51,6 @@ static int convert_to_records(char * filename, struct record * buffer[]){
 }
 
 int main(int argc, char **argv){
-	struct Record** buffer [1024];
+	struct Record* buffer [1024];
 	convert_to_records(argv[1], buffer);	
 }
