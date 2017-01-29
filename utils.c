@@ -28,7 +28,11 @@ static int convert_to_records(const char * filename){
 	return 0;
 }
 
-struct Record convert_to_record(char * line[]){
+struct Record * convert_to_record(char * line[]){
 	struct Record * new_record = (struct Record *) malloc(sizeof(struct Record));
-		
+	new_record->uid1 = strtok(line, ",");
+	new_record->uid2 = strtok(0, ",");
+
+	return new_record;
+
 }
