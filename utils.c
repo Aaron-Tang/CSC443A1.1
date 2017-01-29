@@ -10,12 +10,14 @@ typedef struct record {
 
 const int MAX_CHARS_PER_LINE = 1024;
 
-struct record convert_to_record(char line[]){
+void convert_to_record(char line[], Record * current_record){
 
 	char * uid1 = strtok(line, ",");
 	char * uid2 = strtok(NULL, ",");
-	struct record new_record = {atoi(uid1), atoi(uid2)};
-	return new_record;
+	//struct record new_record = {atoi(uid1), atoi(uid2)};
+	current_record->uid1 = atoi(uid1);
+	current_record->uid2 = atoi(uid2);
+	//return new_record;
 
 }
 
@@ -37,7 +39,7 @@ static int convert_to_records(char * filename, struct record buffer[]){
 	while( fgets (current_line, MAX_CHARS_PER_LINE, fp_read)!=NULL ) {
 		current_line [strcspn (current_line, "\r\n")] = '\0'; //remove end-of-line characters
 		Record *current = malloc(sizeof(Record));
-		current = &convert_to_record(current_line);
+		convert_to_record(current_line, current);
 		buffer[counter] = current;
 		free(&current);
 	}
