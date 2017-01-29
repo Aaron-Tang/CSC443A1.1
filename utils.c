@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #include "utils.h"
 
 static int convert_to_records(const char * filename){
@@ -29,5 +30,5 @@ static int convert_to_records(const char * filename){
 
 static record convert_to_record(char * line[]){
 	struct record * new_record = (struct record *) malloc(sizeof(struct recrod));
-	
+		
 }
