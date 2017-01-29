@@ -28,7 +28,7 @@ static int convert_to_records(const char * filename){
 	return 0;
 }
 
-static record convert_to_record(char * line[]){
-	struct record * new_record = (struct record *) malloc(sizeof(struct recrod));
+static Record convert_to_record(char * line[]){
+	struct Record * new_record = (struct Record *) malloc(sizeof(struct Recrod));
 		
 }
