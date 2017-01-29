@@ -41,7 +41,7 @@ static int convert_to_records(char * filename, struct record * buffer[]){
 		Record *current = malloc(sizeof(Record));
 		convert_to_record(current_line, current);
 		buffer[counter] = current;
-		free(&current);
+		free(current);
 	}
 	
 	fclose (fp_read);
@@ -50,6 +50,6 @@ static int convert_to_records(char * filename, struct record * buffer[]){
 }
 
 int main(int argc, char **argv){
-	struct Record * buffer [1024];
-	convert_to_records(argv[1], buffer);	
+	struct Record buffer [1024];
+	convert_to_records(argv[1], &buffer);	
 }
