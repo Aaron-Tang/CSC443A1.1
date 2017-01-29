@@ -21,36 +21,36 @@ void convert_to_record(char line[], Record * current_record){
 
 }
 
-static int convert_to_records(char * filename, struct record * buffer[]){
-	/* returns: -1 if there is an error. */
+// static int convert_to_records(char * filename, struct record * buffer[]){
+// 	/* returns: -1 if there is an error. */
 	
-	char current_line[MAX_CHARS_PER_LINE];
-	int counter = 0;
+// 	char current_line[MAX_CHARS_PER_LINE];
+// 	int counter = 0;
 
-	FILE *fp_read;
+// 	FILE *fp_read;
 	
-	/* open text file for reading */
-	if (!(fp_read= fopen(filename, "r"))) {
-		printf ("Could not open file \"%s\" for reading \n", filename);
-		return (-1);
-	}
+// 	/* open text file for reading */
+// 	if (!(fp_read= fopen(filename, "r"))) {
+// 		printf ("Could not open file \"%s\" for reading \n", filename);
+// 		return (-1);
+// 	}
 	     
-	/* reading lines */
-	while( fgets (current_line, MAX_CHARS_PER_LINE, fp_read)!=NULL ) {
-		current_line [strcspn (current_line, "\r\n")] = '\0'; //remove end-of-line characters
-		Record *current = malloc(sizeof(Record));
-		convert_to_record(current_line, current);
-		buffer[counter] = current;
-		printf("%d\n", buffer[counter]->uid1);
-		free(current);
-	}
+// 	/* reading lines */
+// 	while( fgets (current_line, MAX_CHARS_PER_LINE, fp_read)!=NULL ) {
+// 		current_line [strcspn (current_line, "\r\n")] = '\0'; //remove end-of-line characters
+// 		Record *current = malloc(sizeof(Record));
+// 		convert_to_record(current_line, current);
+// 		buffer[counter] = current;
+// 		printf("%d\n", buffer[counter]->uid1);
+// 		free(current);
+// 	}
 	
-	fclose (fp_read);
+// 	fclose (fp_read);
 
-	return 0;
-}
+// 	return 0;
+// }
 
-int main(int argc, char **argv){
-	struct record* buffer [1024];
-	convert_to_records(argv[1], buffer);	
-}
+// int main(int argc, char **argv){
+// 	struct record* buffer [1024];
+// 	convert_to_records(argv[1], buffer);	
+// }
