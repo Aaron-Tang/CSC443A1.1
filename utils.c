@@ -21,7 +21,7 @@ void convert_to_record(char line[], Record * current_record){
 
 }
 
-static int convert_to_records(char * filename, struct record * buffer[]){
+static int convert_to_records(char * filename, struct Record * buffer[]){
 	/* returns: -1 if there is an error. */
 	
 	char current_line[MAX_CHARS_PER_LINE];
@@ -50,6 +50,6 @@ static int convert_to_records(char * filename, struct record * buffer[]){
 }
 
 int main(int argc, char **argv){
-	char buffer [1024];
+	struct Record * buffer [1024];
 	convert_to_records(argv[1], buffer);	
 }
