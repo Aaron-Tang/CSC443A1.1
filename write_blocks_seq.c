@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include utils.c
+#include "utils.c"
 
 /* Our structure */
 typedef struct record  {
@@ -10,9 +10,9 @@ typedef struct record  {
 } Record;
 
 
-static int write_blocks_seq(char * filename, int block_size){
+static int write_blocks_seq(char * filename, int blocksize){
   
-	int block_size = block_size;
+	int block_size = blocksize;
 	int records_per_block = block_size/sizeof(Record);
 	char current_line[MAX_CHARS_PER_LINE];
 	int total_records = 0;
