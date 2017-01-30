@@ -46,7 +46,7 @@ static int write_blocks_seq(char * filename, int blocksize){
 			fclose(fp_write);
 			total_records = 0;
 
-			buffer[total_records] = current;
+			buffer[total_records] = *current;
 			free(current);
 			total_records++;
 		}
