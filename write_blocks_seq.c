@@ -28,14 +28,14 @@ static int write_blocks_seq(char * filename, int blocksize){
 		Record *current = malloc(sizeof(Record));
 		convert_to_record(current_line, current);
 
-		if (total_records != records_per_block){
+		if (total_records < records_per_block){
 			buffer[total_records] = *current;
 			free(current);
 			total_records++;
 			printf("HERE\n");
 		}
 		else{
-			if (!(fp_write = fopen ("records.txt" , "wb" ))){
+			if (!(fp_write = fopen ("records.dat" , "wb" ))){
 				printf ("Could not open file records.dat for writing \n");
 				return (-1);
 			}
