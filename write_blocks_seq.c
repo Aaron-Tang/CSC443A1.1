@@ -38,7 +38,7 @@ static int write_blocks_seq(char * filename, int blocksize){
 			printf("HERE, %d\n", total_records);
 		}
 		else{
-			if (!(fp_write = fopen ("records.dat" , "wb" ))){
+			if (!(fp_write = fopen ("records.txt" , "w" ))){
 				printf ("Could not open file records.dat for writing \n");
 				return (-1);
 			}
