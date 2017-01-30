@@ -31,7 +31,8 @@ static int read_blocks_seq(char * filename, int blocksize){
 	/* allocate buffer for 1 block */
 	Record * buffer = (Record *) calloc (records_per_block, sizeof (Record));
 	
-	printf("%d\n", sizeof(buffer));
+	printf("%lu\n", sizeof(buffer));
+	
 	if (!(fp_read = fopen ( filename , "rb" ))){
 		printf ("Could not open file \"%s\" for reading \n", filename);
 		return (-1);
