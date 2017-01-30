@@ -7,20 +7,6 @@
 #include <errno.h>
 #include "utils.c"
 
-static int read_ram_seq(char * filename){
-	int max_followers = 0;
-
-	int unique_ids = 0;
-	int total_follows = 0;
-
-	int current_amount_for_id = 0;
-	int current_id;
-
-	size_t bytes_read = 0;
-
-
-
-
 off_t fsize(const char *filename) {
     struct stat st;
 
@@ -33,11 +19,23 @@ off_t fsize(const char *filename) {
     return -1;
 }
 
+static int read_ram_seq(char * filename){
+	int max_followers = 0;
+
+	int unique_ids = 0;
+	int total_follows = 0;
+
+	int current_amount_for_id = 0;
+	int current_id;
+
+	size_t bytes_read = 0;
+	int filesize;
 
 	FILE *fp_read;
 	
 	/* allocate buffer for 1 block */
-	Record * buffer = (Record *) calloc (1, (int) fsize(filename));
+	filesize = (int) fsize(filename);
+	Record * buffer = (Record *) calloc (1, filesize);
 	
 
 	if (!(fp_read = fopen ( filename , "rb" ))){
@@ -48,15 +46,15 @@ off_t fsize(const char *filename) {
 
 
 	/* read records into buffer */
-	while((bytes_read = fread (buffer, sizeof(Record), 1, fp_read)) > 0){
-		for (int i = 0; i < 1; i++){
-			if (buffer[i].uid1 != current_id){
+	while((bytes_read = fread (buffer, filesize, 1, fp_read)) > 0){
+		for (int i = 0; i < filesize; i++){
+			if (buffer[i * 8].uid1 != current_id){
 				if (current_amount_for_id > max_followers){
 					max_followers = current_amount_for_id;
 				}
 
 				unique_ids += 1;
-				current_id = buffer[i].uid1;
+				current_id = buffer[i * 8].uid1;
 				current_amount_for_id = 1;
 				total_follows += 1;
 			}
