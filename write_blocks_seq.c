@@ -34,7 +34,7 @@ static int write_blocks_seq(char * filename, int blocksize){
 		if (total_records < records_per_block){
 			buffer[total_records] = *current;
 			free(current);
-			total_records++;
+			total_records = total_records + 1;
 			printf("HERE, %d\n", total_records);
 		}
 		else{
@@ -48,11 +48,12 @@ static int write_blocks_seq(char * filename, int blocksize){
 			 
 			/* force data to disk */
 			fflush (fp_write); 
+			printf("MAYBE?\n");
 			total_records = 0;
 
 			buffer[total_records] = *current;
 			free(current);
-			total_records++;
+			total_records = total_records + 1;
 		}
 
 	}
