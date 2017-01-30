@@ -39,11 +39,13 @@ static int read_blocks_seq(char * filename, int blocksize){
 	} 
 	
 	/* read records into buffer */
-	while(bytes_read = fread (buffer, sizeof(Record), records_per_block, fp_read) > 0){
+	while((bytes_read = fread (buffer, sizeof(Record), records_per_block, fp_read)) > 0){
 		for (int i = 0; i < records_per_block; i++){
 			if (buffer[i].uid1 != current_id){
-				if (current_amount_for_id > max_followers)
+				if (current_amount_for_id > max_followers){
 					max_followers_id = current_id;
+					max_followers = current_amount_for_id;
+				}
 
 				unique_ids += 1;
 				current_id = buffer[i].uid1;
@@ -61,5 +63,11 @@ static int read_blocks_seq(char * filename, int blocksize){
 	fclose (fp_read);
 	free (buffer);
 
-	printf("Max follows: %d  Average follows: %ld \n", max_followers, (total_follows/unique_ids));
+	printf("Max follows: %d  Average follows: %ld \n", max_followers_id, (total_follows/unique_ids));
+
+	return 0;
+}
+
+int main(int argc, char **argv){
+	read_blocks_seq(argv[1], atoi(argv[2]));	
 }
