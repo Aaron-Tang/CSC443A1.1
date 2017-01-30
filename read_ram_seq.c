@@ -46,7 +46,7 @@ static int read_ram_seq(char * filename){
 
 
 	/* read records into buffer */
-	bytes_read = fread (buffer, filesize, 1, fp_read)
+	bytes_read = fread (buffer, filesize, 1, fp_read);
 	for (int i = 0; i < filesize / 8; i++){
 		if (buffer[i * 8].uid1 != current_id){
 			if (current_amount_for_id > max_followers){
