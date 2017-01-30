@@ -9,7 +9,6 @@ static int read_blocks_seq(char * filename, int blocksize){
 	int records_per_block;
 
 	int max_followers = 0;
-	int max_followers_id;
 
 	int unique_ids = 0;
 	int total_follows = 0;
@@ -43,7 +42,6 @@ static int read_blocks_seq(char * filename, int blocksize){
 		for (int i = 0; i < records_per_block; i++){
 			if (buffer[i].uid1 != current_id){
 				if (current_amount_for_id > max_followers){
-					max_followers_id = current_id;
 					max_followers = current_amount_for_id;
 				}
 
@@ -65,7 +63,7 @@ static int read_blocks_seq(char * filename, int blocksize){
 
 	float average = total_follows / unique_ids;
 
-	printf("Max follows: %d Average follows: %ld \n", max_followers, average);
+	printf("Max follows: %d Average follows: %f \n", max_followers, average);
 
 	return 0;
 }
