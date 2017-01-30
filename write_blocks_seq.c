@@ -44,7 +44,6 @@ static int write_blocks_seq(char * filename, int blocksize){
 			 
 			/* force data to disk */
 			fflush (fp_write); 
-			fclose(fp_write);
 			total_records = 0;
 
 			buffer[total_records] = *current;
@@ -54,6 +53,7 @@ static int write_blocks_seq(char * filename, int blocksize){
 
 	}
 	
+	fclose(fp_write);
 	fclose (fp_read);
 
 	free (buffer);
