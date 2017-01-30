@@ -18,6 +18,13 @@ static int read_blocks_seq(char * filename, int blocksize){
 
 	size_t bytes_read = 0;
 
+	struct timeb t_begin, t_end;
+	long time_spent_ms;
+	 
+	long total_records = 0;
+ 
+
+
 	if (blocksize % sizeof(Record) != 0){
 		printf("Incorrect blocksize\n");
 		return (-1);
@@ -32,6 +39,9 @@ static int read_blocks_seq(char * filename, int blocksize){
 	Record * buffer = (Record *) calloc (records_per_block, sizeof (Record));
 	
 	printf("%lu\n", sizeof(buffer));
+
+	ftime(&t_begin);  
+
 
 	if (!(fp_read = fopen ( filename , "rb" ))){
 		printf ("Could not open file \"%s\" for reading \n", filename);
@@ -57,15 +67,28 @@ static int read_blocks_seq(char * filename, int blocksize){
 				total_follows += 1;
 
 			}
+			total_records ++;
 		}
 	}
 	
 	fclose (fp_read);
 	free (buffer);
 
+	 /* code to be timed */
+	ftime(&t_end);     
+	 
+	/* time elapsed in milliseconds */
+	time_spent_ms = (long) (1000 *(t_end.time - t_begin.time)
+	       + (t_end.millitm - t_begin.millitm)); 
+ 
+
 	float average = total_follows / (float) unique_ids;
 
 	printf("Max follows: %d Average follows: %f \n", max_followers, average);
+	/* result in MB per second */
+	printf ("Data rate: %.3f MBPS\n", ((total_records*sizeof(Record))/(float)time_spent_ms * 1000)/MB);
+
+
 
 	return 0;
 }

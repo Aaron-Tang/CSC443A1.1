@@ -30,6 +30,11 @@ static int read_ram_seq(char * filename){
 
 	int filesize;
 
+	struct timeb t_begin, t_end;
+	long time_spent_ms;
+	 
+	long total_records = 0;
+	 
 	FILE *fp_read;
 	
 	/* allocate buffer for 1 block */
@@ -46,7 +51,9 @@ static int read_ram_seq(char * filename){
 
 	/* read records into buffer */
 	fread (buffer, filesize, 1, fp_read);
-	for (int i = 0; i <= filesize / sizeof(Record); i++){
+	ftime(&t_begin);  
+
+	for (int i = 0; i < filesize / sizeof(Record); i++){
 		printf("%d\n", buffer[i].uid1);
 		if (buffer[i].uid1 != current_id){
 			if (current_amount_for_id > max_followers){
@@ -63,13 +70,23 @@ static int read_ram_seq(char * filename){
 			total_follows += 1;
 
 		}
-	}
-	
+
+	 /* code to be timed */
+	 total_records ++;
+ 	}
+	ftime(&t_end);     
 	
 	fclose (fp_read);
 	free (buffer);
-
+	
 	float average = total_follows / (float) unique_ids;
+	/* time elapsed in milliseconds */
+	time_spent_ms = (long) (1000 *(t_end.time - t_begin.time)
+	       + (t_end.millitm - t_begin.millitm)); 
+	 
+	/* result in MB per second */
+	printf ("Data rate: %.3f MBPS\n", ((total_records*sizeof(Record))/(float)time_spent_ms * 1000)/MB);
+
 
 	printf("Max follows: %d Average follows: %f \n", max_followers, average);
 
