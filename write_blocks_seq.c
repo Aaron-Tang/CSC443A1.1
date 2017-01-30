@@ -41,13 +41,13 @@ static int write_blocks_seq(char * filename, int blocksize){
 
 
 	/* reading lines */
-	while( fgets (current_line, MAX_CHARS_PER_LINE, fp_read)!=NULL ) {
+	while(fgets(current_line, MAX_CHARS_PER_LINE, fp_read) !=NULL ) {
 		current_line [strcspn (current_line, "\r\n")] = '\0'; //remove end-of-line characters
 		Record * current = (Record *) malloc(sizeof(Record));
 		convert_to_record(current_line, current);
 
 		printf("THERE\n");
-		if (total_records == records_per_block){
+		if (total_records == records_per_block || feof(fp_read)){
 			printf("NOW HERE\n");
 			fwrite (buffer, sizeof(Record), total_records, fp_write);
 			/* force data to disk */
@@ -66,8 +66,7 @@ static int write_blocks_seq(char * filename, int blocksize){
 		total_records_time ++;
 	}
 	
-	fwrite (buffer, sizeof(Record), total_records, fp_write);
-	fflush (fp_write); 
+
 
 	fclose(fp_write);
 	fclose (fp_read);
