@@ -4,12 +4,6 @@
 #include <string.h>
 #include "utils.c"
 
-/* Our structure */
-typedef struct record  {
-	int uid1,uid2;
-} Record;
-
-
 static int write_blocks_seq(char * filename, int blocksize){
   
 	int block_size = blocksize;
@@ -31,7 +25,7 @@ static int write_blocks_seq(char * filename, int blocksize){
 	/* reading lines */
 	while( fgets (current_line, MAX_CHARS_PER_LINE, fp_read)!=NULL ) {
 		current_line [strcspn (current_line, "\r\n")] = '\0'; //remove end-of-line characters
-		Record *current = malloc(sizeof(Record));
+		Record current = malloc(sizeof(Record));
 		convert_to_record(current_line, current);
 
 		if (total_records != records_per_block){
