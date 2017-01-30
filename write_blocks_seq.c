@@ -2,10 +2,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/timeb.h>
 #include "utils.c"
 
 static int write_blocks_seq(char * filename, int blocksize){
-  
+
+	struct timeb t_begin, t_end;
+	long time_spent_ms; 
+	long total_records_time = 0;
+	   
 	int block_size = blocksize;
 	int records_per_block = block_size/sizeof(Record);
 	printf("%d\n", records_per_block);
@@ -17,6 +22,8 @@ static int write_blocks_seq(char * filename, int blocksize){
 	FILE *fp_read;
 	FILE *fp_write;
 	
+	ftime(&t_begin);  
+
 	/* open text file for reading */
 	if (!(fp_read= fopen(filename, "r"))) {
 		printf ("Could not open file \"%s\" for reading \n", filename);
@@ -38,7 +45,7 @@ static int write_blocks_seq(char * filename, int blocksize){
 		convert_to_record(current_line, current);
 
 		printf("THERE\n");
-		if (total_records == records_per_block){
+		if (total_records == records_per_block || ){
 			printf("NOW HERE\n");
 			fwrite (buffer, sizeof(Record), total_records, fp_write);
 			/* force data to disk */
@@ -57,11 +64,22 @@ static int write_blocks_seq(char * filename, int blocksize){
 
 	}
 	
+
+
 	fclose(fp_write);
 	fclose (fp_read);
 
 	free (buffer);
 
+	total_records_time ++;
+	ftime(&t_end);     
+	 
+	/* time elapsed in milliseconds */
+	time_spent_ms = (long) (1000 *(t_end.time - t_begin.time)
+	       + (t_end.millitm - t_begin.millitm)); 
+	 
+	/* result in MB per second */
+	printf ("Data rate: %.3f MBPS\n", ((total_records_time*sizeof(Record))/(float)time_spent_ms * 1000)/MB);
 	return 0;
 }
 
