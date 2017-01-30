@@ -10,6 +10,8 @@ static int write_blocks_seq(char * filename, int blocksize){
 	struct timeb t_begin, t_end;
 	long time_spent_ms; 
 	long total_records_time = 0;
+	// Remove later?
+	int MB = 1024 * 1024;
 	   
 	int block_size = blocksize;
 	int records_per_block = block_size/sizeof(Record);
@@ -61,7 +63,7 @@ static int write_blocks_seq(char * filename, int blocksize){
 		buffer[total_records] = *current;
 		free(current);
 		total_records = total_records + 1;
-
+		total_records_time ++;
 	}
 	
 
@@ -71,7 +73,7 @@ static int write_blocks_seq(char * filename, int blocksize){
 
 	free (buffer);
 
-	total_records_time ++;
+
 	ftime(&t_end);     
 	 
 	/* time elapsed in milliseconds */
@@ -79,7 +81,8 @@ static int write_blocks_seq(char * filename, int blocksize){
 	       + (t_end.millitm - t_begin.millitm)); 
 	 
 	/* result in MB per second */
-	printf ("Data rate: %.3f MBPS\n", ((total_records_time*sizeof(Record))/(float)time_spent_ms * 1000)/(1024 * 1024));
+	// replace MB with integer values
+	printf ("Data rate: %.3f MBPS\n", ((total_records_time*sizeof(Record))/(float)time_spent_ms * 1000)/MB);
 	return 0;
 }
 

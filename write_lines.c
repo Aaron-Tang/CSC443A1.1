@@ -10,6 +10,9 @@ static int write_lines(char * filename){
 	struct timeb t_begin, t_end;
 	long time_spent_ms; 
 	long total_records_time = 0;
+
+	// remove later?
+	int MB = 1024 * 1024;
 	   
 	
 	char current_line[MAX_CHARS_PER_LINE];
@@ -50,10 +53,10 @@ static int write_lines(char * filename){
 	 
 	/* result in MB per second */
 	// replace MB with integer values
-	printf ("Data rate: %.3f MBPS\n", ((total_records_time*sizeof(int * 2))/(float)time_spent_ms * 1000)/MB);
+	printf ("Data rate: %.3f MBPS\n", ((total_records_time*8/(float)time_spent_ms * 1000)/MB);
 	return 0;
 }
 
 int main(int argc, char **argv){
-	write_blocks_seq(argv[1]);	
+	write_lines(argv[1]);	
 }
