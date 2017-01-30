@@ -53,7 +53,7 @@ static int write_lines(char * filename){
 	 
 	/* result in MB per second */
 	// replace MB with integer values
-	printf ("Data rate: %.3f MBPS\n", ((total_records_time*8/(float)time_spent_ms * 1000)/MB);
+	printf ("Data rate: %.3f MBPS\n", ((total_records_time*8/(float)time_spent_ms * 1000)/MB));
 	return 0;
 }
 
