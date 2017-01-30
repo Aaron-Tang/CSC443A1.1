@@ -37,6 +37,7 @@ static int write_blocks_seq(char * filename, int blocksize){
 		Record * current = (Record *) malloc(sizeof(Record));
 		convert_to_record(current_line, current);
 
+		printf("THERE\n");
 		if (total_records < records_per_block){
 			buffer[total_records] = *current;
 			free(current);
