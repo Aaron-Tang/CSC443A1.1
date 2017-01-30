@@ -11,6 +11,8 @@ static int write_blocks_seq(char * filename, int blocksize){
 	printf("%d\n", records_per_block);
 	char current_line[MAX_CHARS_PER_LINE];
 	int total_records = 0;
+	printf("total_records, %d\n", total_records);
+
 
 	FILE *fp_read;
 	FILE *fp_write;
