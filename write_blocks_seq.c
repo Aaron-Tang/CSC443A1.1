@@ -66,7 +66,8 @@ static int write_blocks_seq(char * filename, int blocksize){
 		total_records_time ++;
 	}
 	
-
+	fwrite (buffer, sizeof(Record), total_records, fp_write);
+	fflush (fp_write); 
 
 	fclose(fp_write);
 	fclose (fp_read);
