@@ -63,7 +63,7 @@ static int read_blocks_seq(char * filename, int blocksize){
 	fclose (fp_read);
 	free (buffer);
 
-	float average = total_follows / unique_ids;
+	float average = total_follows / (float) unique_ids;
 
 	printf("Max follows: %d Average follows: %f \n", max_followers, average);
 
