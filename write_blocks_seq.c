@@ -22,8 +22,14 @@ static int write_blocks_seq(char * filename, int blocksize){
 		printf ("Could not open file \"%s\" for reading \n", filename);
 		return (-1);
 	}
+
+	if (!(fp_write = fopen ("records.dat" , "wb" ))){
+		printf ("Could not open file records.dat for writing \n");
+		return (-1);
+	}
 	     
-	Record * buffer = (Record *) calloc (records_per_block, sizeof (Record)) ;
+	Record * buffer = (Record *) calloc (records_per_block, sizeof (Record));
+
 
 	/* reading lines */
 	while( fgets (current_line, MAX_CHARS_PER_LINE, fp_read)!=NULL ) {
@@ -38,10 +44,7 @@ static int write_blocks_seq(char * filename, int blocksize){
 			printf("HERE, %d\n", total_records);
 		}
 		else{
-			if (!(fp_write = fopen ("records.txt" , "w" ))){
-				printf ("Could not open file records.dat for writing \n");
-				return (-1);
-			}
+
 			/* flush buffer when full */
 			printf("NOW HERE\n");
 			fwrite ( buffer, sizeof(Record), total_records, fp_write);
