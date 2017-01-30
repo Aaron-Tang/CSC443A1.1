@@ -41,6 +41,7 @@ static int write_blocks_seq(char * filename, int blocksize){
 				return (-1);
 			}
 			/* flush buffer when full */
+			printf("NOW HERE\n");
 			fwrite ( buffer, sizeof(Record), total_records, fp_write);
 			 
 			/* force data to disk */
