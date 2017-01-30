@@ -19,7 +19,7 @@ static int read_blocks_seq(char * filename, int blocksize){
 
 	size_t bytes_read = 0;
 
-	if (block_size % sizeof(Record) != 0){
+	if (blocksize % sizeof(Record) != 0){
 		printf("Incorrect blocksize\n");
 		return (-1);
 	}
@@ -30,7 +30,7 @@ static int read_blocks_seq(char * filename, int blocksize){
 	FILE *fp_read;
 	
 	/* allocate buffer for 1 block */
-	Record * buffer = (record *) calloc (records_per_block, sizeof (record)) ;
+	Record * buffer = (Record *) calloc (records_per_block, sizeof (Record)) ;
 	
 	if (!(fp_read = fopen ( filename , "rb" ))){
 		printf ("Could not open file \"%s\" for reading \n", filename);
@@ -39,7 +39,7 @@ static int read_blocks_seq(char * filename, int blocksize){
 	} 
 	
 	/* read records into buffer */
-	while(size_t = fread (buffer, sizeof(Record), records_per_block, fp_read) > 0){
+	while(bytes_read = fread (buffer, sizeof(Record), records_per_block, fp_read) > 0){
 		for (int i = 0; i < records_per_block; i++){
 			if (buffer[i].uid1 != current_id){
 				if (current_amount_for_id > max_followers)
