@@ -38,27 +38,22 @@ static int write_blocks_seq(char * filename, int blocksize){
 		convert_to_record(current_line, current);
 
 		printf("THERE\n");
-		if (total_records < records_per_block){
-			buffer[total_records] = *current;
-			free(current);
-			total_records = total_records + 1;
-			printf("HERE, %d\n", total_records);
-		}
-		else{
-
-			/* flush buffer when full */
+		if (total_records == records_per_block){
 			printf("NOW HERE\n");
-			fwrite ( buffer, sizeof(Record), total_records, fp_write);
-			 
+			fwrite (buffer, sizeof(Record), total_records, fp_write);
 			/* force data to disk */
 			fflush (fp_write); 
 			printf("MAYBE?\n");
 			total_records = 0;
 
-			buffer[total_records] = *current;
-			free(current);
-			total_records = total_records + 1;
 		}
+
+			/* flush buffer when full */
+
+		printf("HERE\n");	
+		buffer[total_records] = *current;
+		free(current);
+		total_records = total_records + 1;
 
 	}
 	
