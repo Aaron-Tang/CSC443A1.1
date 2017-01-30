@@ -45,7 +45,7 @@ static int write_blocks_seq(char * filename, int blocksize){
 		convert_to_record(current_line, current);
 
 		printf("THERE\n");
-		if (total_records == records_per_block || ){
+		if (total_records == records_per_block){
 			printf("NOW HERE\n");
 			fwrite (buffer, sizeof(Record), total_records, fp_write);
 			/* force data to disk */
@@ -79,7 +79,7 @@ static int write_blocks_seq(char * filename, int blocksize){
 	       + (t_end.millitm - t_begin.millitm)); 
 	 
 	/* result in MB per second */
-	printf ("Data rate: %.3f MBPS\n", ((total_records_time*sizeof(Record))/(float)time_spent_ms * 1000)/MB);
+	printf ("Data rate: %.3f MBPS\n", ((total_records_time*sizeof(Record))/(float)time_spent_ms * 1000)/(1024 * 1024));
 	return 0;
 }
 
