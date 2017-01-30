@@ -56,8 +56,10 @@ static int write_blocks_seq(char * filename, int blocksize){
 	fclose (fp_read);
 
 	free (buffer);
+
+	return 0;
 }
 
 int main(int argc, char **argv){
-	write_blocks_seq(argv[1], argv[2]);	
+	write_blocks_seq(argv[1], atoi(argv[2]));	
 }
