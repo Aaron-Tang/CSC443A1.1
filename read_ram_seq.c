@@ -49,7 +49,7 @@ off_t fsize(const char *filename) {
 
 	/* read records into buffer */
 	while((bytes_read = fread (buffer, sizeof(Record), 1, fp_read)) > 0){
-		for (int i = 0; i < records_per_block; i++){
+		for (int i = 0; i < 1; i++){
 			if (buffer[i].uid1 != current_id){
 				if (current_amount_for_id > max_followers){
 					max_followers = current_amount_for_id;
