@@ -31,7 +31,7 @@ static int read_blocks_seq(char * filename, int blocksize){
 	/* allocate buffer for 1 block */
 	Record * buffer = (Record *) calloc (records_per_block, sizeof (Record));
 	
-	printf("%lu\n", sizeof(*buffer));
+	printf("%lu\n", sizeof(buffer));
 
 	if (!(fp_read = fopen ( filename , "rb" ))){
 		printf ("Could not open file \"%s\" for reading \n", filename);
@@ -65,7 +65,7 @@ static int read_blocks_seq(char * filename, int blocksize){
 
 	float average = total_follows / unique_ids;
 
-	printf("Max follows: %d Average follows: %f \n", max_followers, average);
+	printf("Max follows: %d Average follows: %lu \n", max_followers, average);
 
 	return 0;
 }
