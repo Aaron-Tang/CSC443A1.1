@@ -7,11 +7,11 @@
 #include <errno.h>
 #include "utils.c"
 
-off_t fsize(const char *filename) {
+int fsize(const char *filename) {
     struct stat st;
 
     if (stat(filename, &st) == 0)
-        return st.st_size;
+        return (int) st.st_size;
 
     fprintf(stderr, "Cannot determine size of %s: %s\n",
             filename, strerror(errno));
@@ -28,13 +28,12 @@ static int read_ram_seq(char * filename){
 	int current_amount_for_id = 0;
 	int current_id;
 
-	size_t bytes_read = 0;
 	int filesize;
 
 	FILE *fp_read;
 	
 	/* allocate buffer for 1 block */
-	filesize = (int) fsize(filename);
+	filesize =  fsize(filename);
 	Record * buffer = (Record *) calloc (1, filesize);
 	
 
