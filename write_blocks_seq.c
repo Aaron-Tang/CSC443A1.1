@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <utils.c>
+#include utils.c
 
 /* Our structure */
 typedef struct record  {
