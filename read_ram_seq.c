@@ -46,25 +46,25 @@ static int read_ram_seq(char * filename){
 
 
 	/* read records into buffer */
-	while((bytes_read = fread (buffer, filesize, 1, fp_read)) > 0){
-		for (int i = 0; i < filesize / 8; i++){
-			if (buffer[i * 8].uid1 != current_id){
-				if (current_amount_for_id > max_followers){
-					max_followers = current_amount_for_id;
-				}
-
-				unique_ids += 1;
-				current_id = buffer[i * 8].uid1;
-				current_amount_for_id = 1;
-				total_follows += 1;
+	bytes_read = fread (buffer, filesize, 1, fp_read)
+	for (int i = 0; i < filesize / 8; i++){
+		if (buffer[i * 8].uid1 != current_id){
+			if (current_amount_for_id > max_followers){
+				max_followers = current_amount_for_id;
 			}
-			else{
-				current_amount_for_id += 1;
-				total_follows += 1;
 
-			}
+			unique_ids += 1;
+			current_id = buffer[i * 8].uid1;
+			current_amount_for_id = 1;
+			total_follows += 1;
+		}
+		else{
+			current_amount_for_id += 1;
+			total_follows += 1;
+
 		}
 	}
+	
 	
 	fclose (fp_read);
 	free (buffer);
