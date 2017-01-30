@@ -33,7 +33,7 @@ static int write_blocks_seq(char * filename, int blocksize){
 			buffer[total_records] = *current;
 			free(current);
 			total_records++;
-			printf("HERE\n");
+			printf("HERE, %d\n", total_records);
 		}
 		else{
 			if (!(fp_write = fopen ("records.dat" , "wb" ))){
