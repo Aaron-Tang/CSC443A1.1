@@ -68,7 +68,6 @@ static int read_ram_rand(char * filename, int blocksize, int loop_amount){
 
 
 		for (int i = 0; i < blocksize; i++){
-			printf("%d\n", buffer[i].uid1);
 			if (i + random_posiiton >= filesize)
 				break;
 
