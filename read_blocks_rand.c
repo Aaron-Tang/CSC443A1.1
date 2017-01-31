@@ -15,7 +15,7 @@ static int read_blocks_ramd(char * filename, int blocksize, int loop_amount){
 	int total_follows = 0;
 
 	int current_amount_for_id = 0;
-	int current_id = NULL;
+	int current_id;
 
 	size_t bytes_read = 0;
 
@@ -54,7 +54,7 @@ static int read_blocks_ramd(char * filename, int blocksize, int loop_amount){
 
 		} 
 		
-		fseeks(fp_read, random_posiiton * sizeof(Record), SEEK_SET);
+		fseek(fp_read, random_posiiton * sizeof(Record), SEEK_SET);
 
 		/* read records into buffer */
 		while((fread (buffer, sizeof(Record), records_per_block, fp_read)) > 0){
