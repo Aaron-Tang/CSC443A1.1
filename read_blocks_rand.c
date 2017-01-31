@@ -6,7 +6,7 @@
 #include <time.h>
 #include "utils.c"
 
-static int read_blocks_ramd(char * filename, int blocksize, int loop_amount){
+static int read_blocks_rand(char * filename, int blocksize, int loop_amount){
 	int records_per_block;
 
 	int max_followers = 0;
@@ -16,8 +16,6 @@ static int read_blocks_ramd(char * filename, int blocksize, int loop_amount){
 
 	int current_amount_for_id = 0;
 	int current_id;
-
-	size_t bytes_read = 0;
 
 	struct timeb t_begin, t_end;
 	long time_spent_ms;
@@ -104,5 +102,5 @@ static int read_blocks_ramd(char * filename, int blocksize, int loop_amount){
 }
 
 int main(int argc, char **argv){
-	read_blocks_seq(argv[1], atoi(argv[2]));	
+	read_blocks_rand(argv[1], atoi(argv[2]), atoi(argv[3]));	
 }
