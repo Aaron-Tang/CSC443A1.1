@@ -15,7 +15,7 @@ static int read_blocks_ramd(char * filename, int blocksize, int loop_amount){
 	int total_follows = 0;
 
 	int current_amount_for_id = 0;
-	int current_id;
+	int current_id = NULL;
 
 	size_t bytes_read = 0;
 
@@ -54,10 +54,10 @@ static int read_blocks_ramd(char * filename, int blocksize, int loop_amount){
 
 		} 
 		
-		fseeks(fp_read, random_posiiton * sizeof(Record), SEEK_SET)
+		fseeks(fp_read, random_posiiton * sizeof(Record), SEEK_SET);
 
 		/* read records into buffer */
-		while((bytes_read = fread (buffer, sizeof(Record), records_per_block, fp_read)) > 0){
+		while((fread (buffer, sizeof(Record), records_per_block, fp_read)) > 0){
 			for (int i = 0; i < records_per_block; i++){
 				if (buffer[i].uid1 != current_id){
 					if (current_amount_for_id > max_followers){
@@ -96,7 +96,7 @@ static int read_blocks_ramd(char * filename, int blocksize, int loop_amount){
 
 	printf("Max follows: %d Average follows: %f \n", max_followers, average);
 	/* result in MB per second */
-	printf ("Data rate: %.3f MBPS\n", ((total_records*sizeof(Record))/(float)time_spent_ms * 1000)/MB);
+	printf ("Data rate: %.3f MBPS\n", ((total_records*sizeof(Record))/(float)time_spent_ms * 1000)/(1024 * 1024));
 
 
 
