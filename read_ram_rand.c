@@ -47,8 +47,6 @@ static int read_ram_rand(char * filename, int blocksize, int loop_amount){
 		return (-1);
 	}
 
-	records_per_block = blocksize / sizeof(Record);
-
 	filesize =  fsize(filename);
 	Record * buffer = (Record *) calloc (1, filesize);
 	
@@ -105,7 +103,7 @@ static int read_ram_rand(char * filename, int blocksize, int loop_amount){
 	       + (t_end.millitm - t_begin.millitm)); 
 	 
 	/* result in MB per second */
-	printf ("Data rate: %.3f MBPS\n", ((total_records*sizeof(Record))/(float)time_spent_ms * 1000)/MB);
+	printf ("Data rate: %.3f MBPS\n", ((total_records*sizeof(Record))/(float)time_spent_ms * 1000)/(1024 * 1024));
 
 
 	printf("Max follows: %d Average follows: %f \n", max_followers, average);
