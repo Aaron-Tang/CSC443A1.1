@@ -30,7 +30,7 @@ int read_blocks_rand(char * filename, int blocksize, int loop_amount){
 	int total_follows = 0;
 
 	int current_amount_for_id = 0;
-	int current_id;
+	int current_id = -1;
 
 	struct timeb t_begin, t_end;
 	long time_spent_ms;

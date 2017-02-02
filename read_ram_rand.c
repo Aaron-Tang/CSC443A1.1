@@ -59,7 +59,11 @@ int read_ram_rand(char * filename, int blocksize, int loop_amount){
 
 
 	/* read records into buffer */
-	fread (buffer, filesize, 1, fp_read);
+	if (!fread (buffer, filesize, 1, fp_read)){
+		printf ("Could not read file \"%s\" for reading \n", filename);
+		return (-1);
+	}
+
 	ftime(&t_begin);  
 	while (iterations != 0){
 
