@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/timeb.h>
-#include "utils.c"
+#include "utils.h"
 
 int write_blocks_seq(char * filename, int blocksize){
 
