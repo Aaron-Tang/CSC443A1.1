@@ -4,5 +4,6 @@ typedef struct record {
 } Record;
 
 const int MAX_CHARS_PER_LINE = 1024;
+const int MB = 1024 * 1024;
 
-void convert_to_record(const char * filename);
+void convert_to_record(const char * filename)
