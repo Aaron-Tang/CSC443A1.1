@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <utils.h>
+#include "utils.h"
 
 
 void convert_to_record(char line[], Record * current_record){
