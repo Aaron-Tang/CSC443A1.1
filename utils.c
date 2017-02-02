@@ -4,6 +4,8 @@
 #include <string.h>
 #include "utils.h"
 
+const int MAX_CHARS_PER_LINE = 1024;
+const int MB = 1024 * 1024;
 
 void convert_to_record(char line[], Record * current_record){
 
