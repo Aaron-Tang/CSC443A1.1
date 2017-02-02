@@ -6,8 +6,8 @@ typedef struct record {
  int uid2;
 } Record;
 
-const int MAX_CHARS_PER_LINE = 1024;
-const int MB = 1024 * 1024;
+const int MAX_CHARS_PER_LINE;
+const int MB;
 
 void convert_to_record(char line[], Record * current_record);
 
