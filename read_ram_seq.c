@@ -26,7 +26,7 @@ int read_ram_seq(char * filename){
 	int total_follows = 0;
 
 	int current_amount_for_id = 0;
-	int current_id;
+	int current_id = -1;
 
 	int filesize;
 
@@ -50,7 +50,10 @@ int read_ram_seq(char * filename){
 
 
 	/* read records into buffer */
-	fread (buffer, filesize, 1, fp_read);
+	if (!fread (buffer, filesize, 1, fp_read)){
+		printf ("Could not read from file \"%s\" \n", filename);
+		return (-1);
+	}
 	ftime(&t_begin);  
 
 	for (int i = 0; i < filesize / sizeof(Record); i++){

@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/timeb.h>
+#include <sys/stat.h>
 #include <time.h>
 #include "utils.h"
 

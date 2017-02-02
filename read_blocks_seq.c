@@ -14,7 +14,7 @@ int read_blocks_seq(char * filename, int blocksize){
 	int total_follows = 0;
 
 	int current_amount_for_id = 0;
-	int current_id;
+	int current_id = -1;
 
 	size_t bytes_read = 0;
 
