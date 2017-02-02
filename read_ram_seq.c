@@ -54,6 +54,7 @@ int read_ram_seq(char * filename){
 		printf ("Could not read from file \"%s\" \n", filename);
 		return (-1);
 	}
+	
 	ftime(&t_begin);  
 
 	for (int i = 0; i < filesize / sizeof(Record); i++){
