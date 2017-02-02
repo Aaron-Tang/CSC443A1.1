@@ -5,7 +5,7 @@
 #include <sys/timeb.h>
 #include "utils.c"
 
-static int write_blocks_seq(char * filename, int blocksize){
+int write_blocks_seq(char * filename, int blocksize){
 
 	struct timeb t_begin, t_end;
 	long time_spent_ms; 
@@ -86,4 +86,5 @@ static int write_blocks_seq(char * filename, int blocksize){
 
 int main(int argc, char **argv){
 	write_blocks_seq(argv[1], atoi(argv[2]));	
+	return 0;
 } 
