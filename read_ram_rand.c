@@ -27,7 +27,7 @@ int read_ram_rand(char * filename, int blocksize, int loop_amount){
 	int total_follows = 0;
 
 	int current_amount_for_id = 0;
-	int current_id;
+	int current_id = -1;
 
 	int filesize;
 
