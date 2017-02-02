@@ -10,8 +10,6 @@ static int write_blocks_seq(char * filename, int blocksize){
 	struct timeb t_begin, t_end;
 	long time_spent_ms; 
 	long total_records_time = 0;
-	// Remove later?
-	int MB = 1024 * 1024;
 	   
 	int block_size = blocksize;
 	int records_per_block = block_size/sizeof(Record);
@@ -86,3 +84,4 @@ static int write_blocks_seq(char * filename, int blocksize){
 	return 0;
 }
 
+write_blocks_seq(argv[1], atoi(argv[2]));
