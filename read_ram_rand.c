@@ -6,7 +6,7 @@
 #include <sys/stat.h>
 #include <errno.h>
 #include <time.h>
-#include "utils.c"
+#include "utils.h"
 
 int fsize(const char *filename) {
     struct stat st;
@@ -20,7 +20,7 @@ int fsize(const char *filename) {
     return -1;
 }
 
-static int read_ram_rand(char * filename, int blocksize, int loop_amount){
+int read_ram_rand(char * filename, int blocksize, int loop_amount){
 	int max_followers = 0;
 
 	int unique_ids = 0;
@@ -110,3 +110,7 @@ static int read_ram_rand(char * filename, int blocksize, int loop_amount){
 	return 0;
 }
 
+int main(int argc, char **argv){
+	read_ram_rand(argv[1], atoi(argv[2]), atoi(argv[3]));	
+	return 0;
+} 

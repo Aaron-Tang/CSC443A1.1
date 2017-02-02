@@ -3,9 +3,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/timeb.h>
-#include "utils.c"
+#include "utils.h"
 
-static int write_lines(char * filename){
+int write_lines(char * filename){
 
 	struct timeb t_begin, t_end;
 	long time_spent_ms; 
@@ -57,3 +57,7 @@ static int write_lines(char * filename){
 	return 0;
 }
 
+int main(int argc, char **argv){
+	write_lines(argv[1]);	
+	return 0;
+} 

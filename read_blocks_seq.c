@@ -3,9 +3,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/timeb.h>
-#include "utils.c"
+#include "utils.h"
 
-static int read_blocks_seq(char * filename, int blocksize){
+int read_blocks_seq(char * filename, int blocksize){
 	int records_per_block;
 
 	int max_followers = 0;
@@ -93,3 +93,7 @@ static int read_blocks_seq(char * filename, int blocksize){
 	return 0;
 }
 
+int main(int argc, char **argv){
+	read_blocks_seq(argv[1], atoi(argv[2]));	
+	return 0;
+} 

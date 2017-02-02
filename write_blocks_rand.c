@@ -4,7 +4,7 @@
 #include <string.h>
 #include <sys/timeb.h>
 #include <time.h>
-#include "utils.c"
+#include "utils.h"
 
 int fsize(const char *filename) {
     struct stat st;
@@ -18,7 +18,7 @@ int fsize(const char *filename) {
     return -1;
 }
 
-static int write_blocks_rand(char * filename, int blocksize, int loop_amount){
+int write_blocks_rand(char * filename, int blocksize, int loop_amount){
 	int filesize;
 
 	struct timeb t_begin, t_end;
@@ -83,3 +83,7 @@ static int write_blocks_rand(char * filename, int blocksize, int loop_amount){
 	return 0;
 }
 
+int main(int argc, char **argv){
+	write_blocks_rand(argv[1], atoi(argv[2]), atoi(argv[3]));	
+	return 0;
+} 

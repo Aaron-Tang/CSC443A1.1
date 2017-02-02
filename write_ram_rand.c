@@ -6,7 +6,7 @@
 #include <sys/stat.h>
 #include <errno.h>
 #include <time.h>
-#include "utils.c"
+#include "utils.h"
 
 int fsize(const char *filename) {
     struct stat st;
@@ -20,7 +20,7 @@ int fsize(const char *filename) {
     return -1;
 }
 
-static int write_ram_rand(char * filename, int blocksize, int loop_amount){
+int write_ram_rand(char * filename, int blocksize, int loop_amount){
 	int filesize;
 
 	struct timeb t_begin, t_end;
@@ -64,7 +64,8 @@ static int write_ram_rand(char * filename, int blocksize, int loop_amount){
 
 		total_records++;
  		iterations--;
-	 }
+	}
+
 	ftime(&t_end);     
 	
 	fclose (fp_read);
@@ -75,10 +76,12 @@ static int write_ram_rand(char * filename, int blocksize, int loop_amount){
 	       + (t_end.millitm - t_begin.millitm)); 
 	 
 	/* result in MB per second */
-	printf ("Data rate: %.3f MBPS\n", ((total_records*sizeof(Record))/(float)time_spent_ms * 1000)/MB;
-
-
-
+	printf ("Data rate: %.3f MBPS\n", ((total_records*sizeof(Record))/(float)time_spent_ms * 1000)/MB);
 	return 0;
+
 }
 
+int main(int argc, char **argv){
+	write_ram_rand(argv[1], atoi(argv[2]), atoi(argv[3]));	
+	return 0;
+} 

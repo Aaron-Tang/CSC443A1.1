@@ -5,7 +5,7 @@
 #include <sys/timeb.h>
 #include <sys/stat.h>
 #include <errno.h>
-#include "utils.c"
+#include "utils.h"
 
 int fsize(const char *filename) {
     struct stat st;
@@ -19,7 +19,7 @@ int fsize(const char *filename) {
     return -1;
 }
 
-static int read_ram_seq(char * filename){
+int read_ram_seq(char * filename){
 	int max_followers = 0;
 
 	int unique_ids = 0;
@@ -93,3 +93,7 @@ static int read_ram_seq(char * filename){
 	return 0;
 }
 
+int main(int argc, char **argv){
+	read_ram_seq(argv[1]);	
+	return 0;
+} 
