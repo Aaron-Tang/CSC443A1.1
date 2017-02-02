@@ -93,6 +93,3 @@ static int read_blocks_seq(char * filename, int blocksize){
 	return 0;
 }
 
-int main(int argc, char **argv){
-	read_blocks_seq(argv[1], atoi(argv[2]));	
-}

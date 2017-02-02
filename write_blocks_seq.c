@@ -86,6 +86,3 @@ static int write_blocks_seq(char * filename, int blocksize){
 	return 0;
 }
 
-int main(int argc, char **argv){
-	write_blocks_seq(argv[1], atoi(argv[2]));	
-}

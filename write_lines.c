@@ -57,6 +57,3 @@ static int write_lines(char * filename){
 	return 0;
 }
 
-int main(int argc, char **argv){
-	write_lines(argv[1]);	
-}

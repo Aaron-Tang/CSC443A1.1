@@ -93,6 +93,3 @@ static int read_ram_seq(char * filename){
 	return 0;
 }
 
-int main(int argc, char **argv){
-	read_ram_seq(argv[1]);	
-}
