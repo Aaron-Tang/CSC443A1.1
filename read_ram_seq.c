@@ -51,13 +51,13 @@ int read_ram_seq(char * filename){
 
 
 	/* read records into buffer */
-	if (result = fread (buffer, filesize, num_of_records, fp_read) > 0){
+	if ((result = fread (buffer, filesize, num_of_records, fp_read)) > 0){
 		ftime(&t_begin);  
 		while (in_buff < result){
 			if (buffer[in_buff].uid1 != current_id){
 				current_id = buffer[in_buff].uid1;
 				unique_ids++;
-				current_amount_for_id = 0
+				current_amount_for_id = 0;
 			}
 			total_records++;
 			in_buff++;
