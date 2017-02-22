@@ -36,10 +36,11 @@ int read_ram_seq(char * filename){
 	long total_records = 0;
 	 
 	FILE *fp_read;
+	int result;
 	
 	/* allocate buffer for 1 block */
 
-	Record * buffer = (Record *) calloc (1, filesize);
+	Record * buffer = (Record *) calloc (num_of_records, filesize);
 	
 
 	if (!(fp_read = fopen ( filename , "rb" ))){
@@ -50,7 +51,7 @@ int read_ram_seq(char * filename){
 
 
 	/* read records into buffer */
-	if (result = fread (buffer, filesize, 1, fp_read) > 0){
+	if (result = fread (buffer, filesize, num_of_records, fp_read) > 0){
 		ftime(&t_begin);  
 		while (in_buff < result){
 			if (buffer[in_buff].uid1 != current_id){
