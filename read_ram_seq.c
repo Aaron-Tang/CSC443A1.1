@@ -23,22 +23,22 @@ int read_ram_seq(char * filename){
 	int max_followers = 0;
 
 	int unique_ids = 0;
-	int total_follows = 0;
 
 	int current_amount_for_id = 0;
-	int current_id = -1;
+	int current_id = 0;
 
-	int filesize;
+	int filesize =  fsize(filename);
+	int num_of_records = filesize / sizeof(Record);
+	int in_buff = 0;
 
 	struct timeb t_begin, t_end;
 	long time_spent_ms;
-	 
 	long total_records = 0;
 	 
 	FILE *fp_read;
 	
 	/* allocate buffer for 1 block */
-	filesize =  fsize(filename);
+
 	Record * buffer = (Record *) calloc (1, filesize);
 	
 
@@ -50,40 +50,28 @@ int read_ram_seq(char * filename){
 
 
 	/* read records into buffer */
-	if (!fread (buffer, filesize, 1, fp_read)){
-		printf ("Could not read from file \"%s\" \n", filename);
-		return (-1);
-	}
-	
-	ftime(&t_begin);  
-
-	for (int i = 0; i < filesize / sizeof(Record); i++){
-		printf("%d\n", buffer[i].uid1);
-		if (buffer[i].uid1 != current_id){
-			if (current_amount_for_id > max_followers){
-				max_followers = current_amount_for_id;
+	if (result = fread (buffer, filesize, 1, fp_read) > 0){
+		ftime(&t_begin);  
+		while (in_buff < result){
+			if (buffer[in_buff].uid1 != current_id){
+				current_id = buffer[in_buff].uid1;
+				unique_ids++;
+				current_amount_for_id = 0
 			}
-
-			unique_ids += 1;
-			current_id = buffer[i].uid1;
-			current_amount_for_id = 1;
-			total_follows += 1;
+			total_records++;
+			in_buff++;
+			current_amount_for_id++;
+			if (current_amount_for_id > max_followers)
+				max_followers = current_amount_for_id;
 		}
-		else{
-			current_amount_for_id += 1;
-			total_follows += 1;
-
-		}
-
+		ftime(&t_end);    
+	}
 	 /* code to be timed */
-	 total_records ++;
- 	}
-	ftime(&t_end);     
 	
 	fclose (fp_read);
 	free (buffer);
 	
-	float average = total_follows / (float) unique_ids;
+	float average = total_records / (float) unique_ids;
 	/* time elapsed in milliseconds */
 	time_spent_ms = (long) (1000 *(t_end.time - t_begin.time)
 	       + (t_end.millitm - t_begin.millitm)); 
