@@ -6,7 +6,8 @@
 #include "utils.h"
 
 int read_blocks_seq(char * filename, int blocksize){
-	int records_per_block;
+	int records_per_block = blocksize / sizeof(Record);
+	int in_buff = 0;
 
 	int max_followers = 0;
 
@@ -14,7 +15,7 @@ int read_blocks_seq(char * filename, int blocksize){
 	int total_follows = 0;
 
 	int current_amount_for_id = 0;
-	int current_id = -1;
+	int current_id = 0;
 
 	size_t bytes_read = 0;
 
@@ -22,15 +23,12 @@ int read_blocks_seq(char * filename, int blocksize){
 	long time_spent_ms;
 	 
 	long total_records = 0;
- 
-
-
+ 	
 	if (blocksize % sizeof(Record) != 0){
 		printf("Incorrect blocksize\n");
 		return (-1);
 	}
 
-	records_per_block = blocksize / sizeof(Record);
 
 
 	FILE *fp_read;
@@ -51,24 +49,20 @@ int read_blocks_seq(char * filename, int blocksize){
 	
 	/* read records into buffer */
 	while((bytes_read = fread (buffer, sizeof(Record), records_per_block, fp_read)) > 0){
-		for (int i = 0; i < records_per_block; i++){
-			if (buffer[i].uid1 != current_id){
-				if (current_amount_for_id > max_followers){
-					max_followers = current_amount_for_id;
-				}
-
-				unique_ids += 1;
-				current_id = buffer[i].uid1;
-				current_amount_for_id = 1;
-				total_follows += 1;
+		while (in_buff < bytes_read){
+			if (buffer[in_buff].uid1 != current_id){
+				current_id = buffer[in_buff].uid1;
+				unique_ids++;
+				current_amount_for_id = 0;
 			}
-			else{
-				current_amount_for_id += 1;
-				total_follows += 1;
-
-			}
-			total_records ++;
+			total_follows ++;
+			in_buff++;
+			current_amount_for_id++;
+			if (current_amount_for_id > max_followers)
+				max_followers = current_amount_for_id;
 		}
+		memset(buffer, 0, sizeof(*buffer));
+		in_buff = 0;
 	}
 	
 	fclose (fp_read);
@@ -87,9 +81,6 @@ int read_blocks_seq(char * filename, int blocksize){
 	printf("Max follows: %d Average follows: %f \n", max_followers, average);
 	/* result in MB per second */
 	printf ("Data rate: %.3f MBPS\n", ((total_records*sizeof(Record))/(float)time_spent_ms * 1000)/MB);
-
-
-
 	return 0;
 }
 
