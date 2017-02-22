@@ -36,9 +36,9 @@ int write_lines(char * filename){
 
 	/* reading lines */
 	while( fgets (current_line, MAX_CHARS_PER_LINE, fp_read)!=NULL ) {
-		current_line [strcspn (current_line, "\r\n")] = '\0'; //remove end-of-line characters
-		fwrite (current_line, sizeof(current_line), 1, fp_write);
-		total_records_time ++;
+		size_t length = strlen(current_line);
+		fwrite (current_line, sizeof(current_line), length, fp_write);
+		total_records_time += (long) length;
 	}
 	
 	fclose(fp_write);
